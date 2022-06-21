@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
+import '../home_screen/home_screen.dart';
+
 class NavigationController extends ChangeNotifier {
-  Screens currentScreen = Screens.dashboard;
+  Screens currentScreen = Screens.home;
 
   changeCurrentScreen(Screens screen) {
     currentScreen = screen;
@@ -10,7 +12,8 @@ class NavigationController extends ChangeNotifier {
 }
 
 enum Screens {
-  dashboard,
+  home,
+  downloads,
   profile,
   settings,
 }
@@ -18,32 +21,34 @@ enum Screens {
 extension ScreenExtension on Screens {
   Widget get icon {
     switch (this) {
-      case Screens.dashboard:
+      case Screens.home:
         return const Icon(CupertinoIcons.home);
       case Screens.profile:
         return const Icon(CupertinoIcons.profile_circled);
       case Screens.settings:
         return const Icon(CupertinoIcons.settings);
+      case Screens.downloads:
+        return const Icon(CupertinoIcons.arrow_down_to_line_alt);
     }
   }
 
   String get label {
     switch (this) {
-      case Screens.dashboard:
-        return 'Dashboard';
+      case Screens.home:
+        return 'home';
       case Screens.profile:
         return 'Profile';
       case Screens.settings:
         return 'Settings';
+      case Screens.downloads:
+        return 'Downloads';
     }
   }
 
   Widget get body {
     switch (this) {
-      case Screens.dashboard:
-        return const Center(
-          child: Text('Dashboard'),
-        );
+      case Screens.home:
+        return const HomeScreen();
       case Screens.profile:
         return const Center(
           child: Text('Profile'),
@@ -51,6 +56,10 @@ extension ScreenExtension on Screens {
       case Screens.settings:
         return const Center(
           child: Text('Settings'),
+        );
+      case Screens.downloads:
+        return const Center(
+          child: Text('Downloads'),
         );
     }
   }

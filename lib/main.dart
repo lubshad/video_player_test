@@ -7,6 +7,7 @@ import 'presentation/route.dart';
 import 'presentation/theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupApp();
   runApp(const MyApp());
 }
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppTheme.setSystemOverlay();
     return GetMaterialApp(
-      title: "App Name",
+      title: "Video Player",
       theme: AppTheme.theme,
       onGenerateRoute: AppRoute.onGenerateRoute,
       onGenerateInitialRoutes: AppRoute.onGenerateInitialRoute,

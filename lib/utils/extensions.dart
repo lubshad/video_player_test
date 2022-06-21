@@ -2,7 +2,7 @@ import 'package:basic_template/basic_template.dart';
 import 'package:flutter/material.dart';
 
 extension AppErrorTypeExtension on AppErrorType {
-   String get message {
+  String get message {
     switch (this) {
       case AppErrorType.api:
         return "Something went wrong, please try again later";
@@ -33,14 +33,23 @@ extension AppErrorTypeExtension on AppErrorType {
   }
 }
 
-
 extension AppErrorExtension on AppError {
-   handleError() {
+  handleError() {
     logger.info(appErrorType);
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
         content: Text(appErrorType.message),
       ),
     );
+  }
+}
+
+extension ViewExtention on num {
+  String get views {
+    if (this < 1000) {
+      return "${this} views";
+    } else {
+      return "${this ~/ 1000}K views";
+    }
   }
 }

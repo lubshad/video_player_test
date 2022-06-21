@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 const defaultAnimationDuration = Duration(milliseconds: 300);
 const defaultAnimationDurationSmall = Duration(milliseconds: 100);
 
@@ -18,3 +17,8 @@ const defaultSpacerHorizontal = SizedBox(width: defaultPadding);
 const defaultSpacerHorizontalLarge = SizedBox(width: defaultPaddingLarge);
 const defaultSpacerHorizontalSmall = SizedBox(width: defaultPaddingSmall);
 const defaultSpacerHorizontalTiny = SizedBox(width: defaultPaddingTiny);
+
+
+const double landscapeAspectRatio = 16 / 9;
+
+const screaminGreen = Color(0xff57EE9D);

@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   basic_template:
     path: ../basic_template
+  video_player: ^2.4.5
+  flutter_downloader: ^1.8.0+1
+  encrypt: ^5.0.1
+  timeago: ^3.2.2
 
 dev_dependencies:
   flutter_test:

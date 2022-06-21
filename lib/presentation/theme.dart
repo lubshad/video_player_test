@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:video_player_test/utils/constants.dart';
 
 class AppTheme {
   static setSystemOverlay() {
@@ -15,9 +16,10 @@ class AppTheme {
     ));
   }
 
-  static ThemeData get theme =>
-      ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue))
-          .copyWith(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      );
+  static ThemeData get theme => ThemeData.light().copyWith(
+      platform: TargetPlatform.iOS,
+      colorScheme: const ColorScheme.light().copyWith(primary: screaminGreen),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+      ));
 }
