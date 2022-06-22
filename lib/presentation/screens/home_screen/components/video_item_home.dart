@@ -2,6 +2,7 @@ import 'package:basic_template/basic_template.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:video_player_test/presentation/route.dart';
+import 'package:video_player_test/presentation/screens/home_screen/components/thumbnail.dart';
 import 'package:video_player_test/utils/extensions.dart';
 
 import '../../../../domain/entities/video_details.dart';
@@ -18,14 +19,13 @@ class VideoItemHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          Get.toNamed(AppRoute.videoPlayerScreen, arguments: videoDetails),
+      onTap: () {
+        Get.until((route) => route.isFirst);
+        Get.toNamed(AppRoute.videoPlayerScreen, arguments: videoDetails);
+      },
       child: Column(
         children: [
-          const AspectRatio(
-            aspectRatio: landscapeAspectRatio,
-            child: Placeholder(),
-          ),
+          Thumbnail(videoUrl: videoDetails.videoUrl),
           ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.white,

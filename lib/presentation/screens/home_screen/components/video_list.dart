@@ -20,7 +20,7 @@ class VideoList extends StatelessWidget {
             return const DefaultLoadingWidget();
           }
           final videos = snapshot.data!.docs
-              .map((e) => VideoDetails.fromMap(e.data()))
+              .map((e) => VideoDetails.fromMap(e.data(), e.id))
               .toList();
           return ListView.separated(
             separatorBuilder: ((context, index) => const Divider()),

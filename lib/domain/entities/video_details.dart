@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VideoDetails {
+  final String id;
   final String title;
   final String videoUrl;
   final Duration duration;
@@ -17,11 +18,13 @@ class VideoDetails {
       required this.duration,
       required this.creatorName,
       required this.creatorAvatarUrl,
+      required this.id,
       required this.totalViews,
       required this.uploadedOn});
 
   Map<String, dynamic> toMap() {
     return {
+      "id": id,
       'title': title,
       'videoUrl': videoUrl,
       'duration': duration.inSeconds,
@@ -32,9 +35,10 @@ class VideoDetails {
     };
   }
 
-  factory VideoDetails.fromMap(Map<String, dynamic> map) {
+  factory VideoDetails.fromMap(Map<String, dynamic> map , String id) {
     Timestamp timestamp = map["uploadedOn"];
     return VideoDetails(
+      id: id,
         title: map["title"],
         videoUrl: map["videoUrl"],
         duration: Duration(seconds: map["duration"]),
@@ -43,9 +47,4 @@ class VideoDetails {
         totalViews: map["views"],
         uploadedOn: timestamp.toDate());
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory VideoDetails.fromJson(String source) =>
-      VideoDetails.fromMap(json.decode(source));
 }

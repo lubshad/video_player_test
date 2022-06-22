@@ -17,10 +17,13 @@ class AppRoute {
     switch (routeName) {
       case initial:
         return MaterialPageRoute(
-            builder: (context) => const NavigationScreen());
+            settings: settings, builder: (context) => const NavigationScreen());
       case videoPlayerScreen:
         return MaterialPageRoute(
-            builder: (context) =>  VideoPlayerScreen(videoDetails: arguments as VideoDetails,));
+            settings: settings,
+            builder: (context) => VideoPlayerScreen(
+                  videoDetails: arguments as VideoDetails,
+                ));
       default:
         return MaterialPageRoute(builder: (context) => const Scaffold());
     }
@@ -34,4 +37,3 @@ class AppRoute {
     ];
   }
 }
-

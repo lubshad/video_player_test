@@ -18,9 +18,11 @@ class VideoPlayerScreen extends StatelessWidget {
       body: Column(
         children: [
           VideoPlayerSection(
-            url: videoDetails.videoUrl,
+            videoDetails: videoDetails,
           ),
-          const ActionSection(),
+          ActionSection(
+            videoDetails: videoDetails,
+          ),
           const Expanded(child: VideoList())
         ],
       ),
