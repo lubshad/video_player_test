@@ -7,7 +7,7 @@ setupApp() async {
   // setUrlStrategy(PathUrlStrategy());
   setupLogger();
   DependencyInjection.inject();
-
+  await GetStorage.init();
   await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   
 }

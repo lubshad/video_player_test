@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:video_player_test/domain/entities/video_details.dart';
+import 'package:video_player_test/presentation/screens/downloads_listing/downloads_listing_controller.dart';
 import 'dart:isolate';
 
 import '../../../../utils/constants.dart';
@@ -23,6 +24,7 @@ class _ActionSectionState extends State<ActionSection> {
   int progress = 0;
 
   final ReceivePort _receivePort = ReceivePort();
+  DownloadsListingController downloadsListingController = Get.find();
 
   static downloadingCallback(id, status, progress) {
     SendPort? sendPort = IsolateNameServer.lookupPortByName("downloading");
@@ -33,10 +35,8 @@ class _ActionSectionState extends State<ActionSection> {
   void initState() {
     super.initState();
 
-
     IsolateNameServer.registerPortWithName(
         _receivePort.sendPort, "downloading");
-
 
     _receivePort.listen((message) {
       progress = message[2];
@@ -44,12 +44,19 @@ class _ActionSectionState extends State<ActionSection> {
         setState(() {});
       }
       DownloadTaskStatus status = message[1];
-      status == DownloadTaskStatus.complete;
+      if (status == DownloadTaskStatus.complete) {
+        downloadsListingController.addToDownloads(widget.videoDetails);
+      }
     });
 
     FlutterDownloader.registerCallback(downloadingCallback);
-  }
 
+    if (downloadsListingController.checkDownloaded(widget.videoDetails)) {
+      setState(() {
+        progress = 100;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +70,9 @@ class _ActionSectionState extends State<ActionSection> {
             onTap: () {},
           ),
           CustomIconButton(
-              onTap: () => startDownload(widget.videoDetails),
+              onTap: progress != 0
+                  ? null
+                  : () => startDownload(widget.videoDetails),
               child: Builder(builder: (context) {
                 if (progress == 0) {
                   return Row(
@@ -130,11 +139,10 @@ class _ActionSectionState extends State<ActionSection> {
     final status = await Permission.storage.request();
 
     if (status.isGranted) {
-      final tempDir = await getTemporaryDirectory();
-
+      final appDir = await getExternalStorageDirectory();
       final id = await FlutterDownloader.enqueue(
         url: videoDetails.videoUrl,
-        savedDir: tempDir.path,
+        savedDir: appDir!.path,
         fileName: "${videoDetails.title}.mp4",
         showNotification: true,
         openFileFromNotification: true,

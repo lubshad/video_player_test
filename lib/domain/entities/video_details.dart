@@ -1,16 +1,14 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VideoDetails {
-  final String id;
+  final String? id;
   final String title;
   final String videoUrl;
   final Duration duration;
   final String creatorName;
   final String creatorAvatarUrl;
   final int totalViews;
-  final DateTime uploadedOn;
+  final Timestamp uploadedOn;
 
   VideoDetails(
       {required this.title,
@@ -18,7 +16,7 @@ class VideoDetails {
       required this.duration,
       required this.creatorName,
       required this.creatorAvatarUrl,
-      required this.id,
+       this.id,
       required this.totalViews,
       required this.uploadedOn});
 
@@ -30,21 +28,32 @@ class VideoDetails {
       'duration': duration.inSeconds,
       'creatorName': creatorName,
       'creatorAvatarUrl': creatorAvatarUrl,
-      'totalViews': totalViews,
+      'views': totalViews,
       'uploadedOn': uploadedOn.millisecondsSinceEpoch,
     };
   }
 
-  factory VideoDetails.fromMap(Map<String, dynamic> map , String id) {
-    Timestamp timestamp = map["uploadedOn"];
+  factory VideoDetails.fromMap(Map<String, dynamic> map, String id) {
     return VideoDetails(
-      id: id,
+        id: id,
         title: map["title"],
         videoUrl: map["videoUrl"],
         duration: Duration(seconds: map["duration"]),
         creatorName: map["creatorName"],
         creatorAvatarUrl: map["creatorAvatarUrl"],
         totalViews: map["views"],
-        uploadedOn: timestamp.toDate());
+        uploadedOn: Timestamp.fromMicrosecondsSinceEpoch(map["uploadedOn"]));
+  }
+
+  factory VideoDetails.fromMapLocal(Map<String, dynamic> map) {
+    return VideoDetails(
+        id: map["id"],
+        title: map["title"],
+        videoUrl: map["videoUrl"],
+        duration: Duration(seconds: map["duration"]),
+        creatorName: map["creatorName"],
+        creatorAvatarUrl: map["creatorAvatarUrl"],
+        totalViews: map["views"],
+        uploadedOn: Timestamp.fromMillisecondsSinceEpoch(map["uploadedOn"]));
   }
 }

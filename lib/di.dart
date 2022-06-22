@@ -1,4 +1,5 @@
 import 'package:basic_template/basic_template.dart';
+import 'package:video_player_test/presentation/screens/downloads_listing/downloads_listing_controller.dart';
 
 import 'data/core/api_constants.dart';
 import 'data/data_sources/remote_data_source.dart';
@@ -11,5 +12,6 @@ class DependencyInjection {
     Get.lazyPut<RemoteDataSource>(
         () => RemoteDataSourceImplementation(Get.find()));
     Get.lazyPut<DataRepository>(() => DataRepositoryImplementation(Get.find()));
+    Get.lazyPut(() => DownloadsListingController());
   }
 }

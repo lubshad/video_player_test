@@ -52,7 +52,7 @@ class VideoItemHome extends StatelessWidget {
                 ),
                 const DotSpacer(),
                 Text(
-                  timeago.format(videoDetails.uploadedOn),
+                  timeago.format(videoDetails.uploadedOn.toDate()),
                   style: Theme.of(context)
                       .textTheme
                       .caption!

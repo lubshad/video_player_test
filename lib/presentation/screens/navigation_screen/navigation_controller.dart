@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+import '../downloads_listing/downloads_listing.dart';
 import '../home_screen/home_screen.dart';
 
 class NavigationController extends ChangeNotifier {
@@ -58,9 +59,9 @@ extension ScreenExtension on Screens {
           child: Text('Settings'),
         );
       case Screens.downloads:
-        return const Center(
-          child: Text('Downloads'),
-        );
+        return const DownloadsListing();
     }
   }
 }
+
+
