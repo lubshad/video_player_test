@@ -31,14 +31,15 @@ class AppTheme {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
       ));
-  
 
   static ThemeData get darkTheme => ThemeData.dark().copyWith(
       textTheme: GoogleFonts.rubikTextTheme(),
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor: youtubeBlack,
-      colorScheme: const ColorScheme.light().copyWith(primary: screaminGreen),
+      colorScheme: const ColorScheme.light().copyWith(primary: youtubeBlack),
       sliderTheme: SliderThemeData(
+          activeTrackColor: Colors.red,
+          thumbColor: Colors.red,
           overlayShape: SliderComponentShape.noOverlay,
           trackHeight: 2,
           inactiveTrackColor: Colors.black26,

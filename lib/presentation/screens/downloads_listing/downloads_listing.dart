@@ -12,22 +12,27 @@ class DownloadsListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DownloadsListingController downloadsListingController = Get.find();
-    return AnimatedBuilder(
-        animation: downloadsListingController,
-        builder: (context, child) {
-          if (downloadsListingController.downloadedVideos.isEmpty) {
-            return const Center(
-              child: Text("No Data found"),
-            );
-          }
-          return ListView.separated(
-              itemBuilder: (context, index) => Builder(builder: (context) {
-                    VideoDetails videoDetails =
-                        downloadsListingController.downloadedVideos[index];
-                    return VideoItemHome(videoDetails: videoDetails);
-                  }),
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: downloadsListingController.downloadedVideos.length);
-        });
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Downloads"),
+      ),
+      body: AnimatedBuilder(
+          animation: downloadsListingController,
+          builder: (context, child) {
+            if (downloadsListingController.downloadedVideos.isEmpty) {
+              return const Center(
+                child: Text("No Data found"),
+              );
+            }
+            return ListView.separated(
+                itemBuilder: (context, index) => Builder(builder: (context) {
+                      VideoDetails videoDetails =
+                          downloadsListingController.downloadedVideos[index];
+                      return VideoItemHome(videoDetails: videoDetails);
+                    }),
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: downloadsListingController.downloadedVideos.length);
+          }),
+    );
   }
 }

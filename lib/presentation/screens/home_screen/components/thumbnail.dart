@@ -33,7 +33,7 @@ class _ThumbnailState extends State<Thumbnail> {
       imageFormat: ImageFormat.JPEG,
       maxWidth:
           512, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
-      quality: 25,
+      quality: 10,
     );
     setState(() {});
   }

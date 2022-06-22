@@ -62,75 +62,80 @@ class _ActionSectionState extends State<ActionSection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(defaultPadding),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomIconButton(
-            child: const Icon(CupertinoIcons.chevron_back),
-            onTap: () {},
-          ),
-          CustomIconButton(
-              onTap: progress != 0
-                  ? null
-                  : () => startDownload(widget.videoDetails),
-              child: Builder(builder: (context) {
-                if (progress == 0) {
-                  return Row(
-                    children: [
-                      const Icon(
-                        CupertinoIcons.arrowtriangle_down_fill,
-                        color: screaminGreen,
-                      ),
-                      Text(
-                        "Download",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 16),
-                      ),
-                      defaultSpacerHorizontalSmall
-                    ],
-                  );
-                } else if (progress == 100) {
-                  return Row(
-                    children: [
-                      const Icon(
-                        CupertinoIcons.check_mark,
-                        color: screaminGreen,
-                      ),
-                      Text(
-                        "Downloaded",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 16),
-                      ),
-                      defaultSpacerHorizontalSmall
-                    ],
-                  );
-                } else {
-                  return Row(
-                    children: [
-                      const Icon(
-                        CupertinoIcons.arrowtriangle_down_fill,
-                        color: screaminGreen,
-                      ),
-                      SizedBox(
-                        width: 100,
-                        child: LinearProgressIndicator(
-                          value: progress.toDouble() / 100,
+      child: IconTheme(
+        data: const IconThemeData(
+          color: Colors.black,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomIconButton(
+              child: const Icon(CupertinoIcons.chevron_back),
+              onTap: () {},
+            ),
+            CustomIconButton(
+                onTap: progress != 0
+                    ? null
+                    : () => startDownload(widget.videoDetails),
+                child: Builder(builder: (context) {
+                  if (progress == 0) {
+                    return Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.arrowtriangle_down_fill,
+                          color: screaminGreen,
                         ),
-                      ),
-                      defaultSpacerHorizontalSmall
-                    ],
-                  );
-                }
-              })),
-          CustomIconButton(
-            child: const Icon(CupertinoIcons.chevron_forward),
-            onTap: () {},
-          ),
-        ],
+                        Text(
+                          "Download",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(fontSize: 16),
+                        ),
+                        defaultSpacerHorizontalSmall
+                      ],
+                    );
+                  } else if (progress == 100) {
+                    return Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.check_mark,
+                          color: screaminGreen,
+                        ),
+                        Text(
+                          "Downloaded",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(fontSize: 16),
+                        ),
+                        defaultSpacerHorizontalSmall
+                      ],
+                    );
+                  } else {
+                    return Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.arrowtriangle_down_fill,
+                          color: screaminGreen,
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: LinearProgressIndicator(
+                            value: progress.toDouble() / 100,
+                          ),
+                        ),
+                        defaultSpacerHorizontalSmall
+                      ],
+                    );
+                  }
+                })),
+            CustomIconButton(
+              child: const Icon(CupertinoIcons.chevron_forward),
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

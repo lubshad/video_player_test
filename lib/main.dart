@@ -1,4 +1,3 @@
-
 import 'package:basic_template/basic_template.dart';
 
 import 'utils/setup_app.dart';
@@ -24,6 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Video Player",
       theme: AppTheme.theme,
+      darkTheme: AppTheme.darkTheme,
       onGenerateRoute: AppRoute.onGenerateRoute,
       onGenerateInitialRoutes: AppRoute.onGenerateInitialRoute,
       initialRoute: AppRoute.initial,

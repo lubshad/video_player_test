@@ -8,6 +8,7 @@
         android:label="video_player_test"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        android:usesCleartextTraffic="true"
         
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
