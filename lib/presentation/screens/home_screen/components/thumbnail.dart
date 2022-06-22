@@ -35,7 +35,9 @@ class _ThumbnailState extends State<Thumbnail> {
           512, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
       quality: 10,
     );
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

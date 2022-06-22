@@ -16,7 +16,7 @@ class VideoDetails {
       required this.duration,
       required this.creatorName,
       required this.creatorAvatarUrl,
-       this.id,
+      this.id,
       required this.totalViews,
       required this.uploadedOn});
 
@@ -42,7 +42,7 @@ class VideoDetails {
         creatorName: map["creatorName"],
         creatorAvatarUrl: map["creatorAvatarUrl"],
         totalViews: map["views"],
-        uploadedOn: Timestamp.fromMicrosecondsSinceEpoch(map["uploadedOn"]));
+        uploadedOn: Timestamp.fromMillisecondsSinceEpoch(map["uploadedOn"]));
   }
 
   factory VideoDetails.fromMapLocal(Map<String, dynamic> map) {

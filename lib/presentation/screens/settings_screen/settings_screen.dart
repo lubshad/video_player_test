@@ -1,3 +1,4 @@
+import 'package:basic_template/basic_template.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player_test/presentation/screens/settings_screen/settings_controller.dart';
 
@@ -8,7 +9,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsController settingsController = SettingsController();
+    SettingsController settingsController = Get.find();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Settings"),

@@ -7,12 +7,15 @@ class SettingsController extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
   SettingsController() {
     var theme = box.read("themeMode");
-    currentTheme = ThemeMode.values[theme ?? 0];
+    setTheme(theme);
     box.listenKey("themeMode", (value) {
-      currentTheme = ThemeMode.values[value ?? 0];
-      notifyListeners();
-      Get.changeThemeMode(currentTheme);
+      setTheme(value);
     });
+  }
+
+  setTheme(int? value) {
+    currentTheme = ThemeMode.values[value ?? 0];
+    Get.changeThemeMode(currentTheme);
   }
 
   changeTheme(ThemeMode themeMode) {

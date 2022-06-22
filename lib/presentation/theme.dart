@@ -18,11 +18,15 @@ class AppTheme {
   }
 
   static ThemeData get theme => ThemeData.light().copyWith(
+      inputDecorationTheme:
+          const InputDecorationTheme(border: OutlineInputBorder()),
       textTheme: GoogleFonts.rubikTextTheme(),
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor: mercuryGray,
-      colorScheme: const ColorScheme.light().copyWith(primary: screaminGreen),
+      colorScheme: const ColorScheme.light().copyWith(primary: Colors.blue),
       sliderTheme: SliderThemeData(
+          activeTrackColor: screaminGreen,
+          thumbColor: screaminGreen,
           overlayShape: SliderComponentShape.noOverlay,
           trackHeight: 2,
           inactiveTrackColor: Colors.black26,
@@ -33,6 +37,8 @@ class AppTheme {
       ));
 
   static ThemeData get darkTheme => ThemeData.dark().copyWith(
+      inputDecorationTheme:
+          const InputDecorationTheme(border: OutlineInputBorder()),
       textTheme: GoogleFonts.rubikTextTheme(),
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor: youtubeBlack,
