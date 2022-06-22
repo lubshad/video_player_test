@@ -18,7 +18,7 @@ const defaultSpacerHorizontalLarge = SizedBox(width: defaultPaddingLarge);
 const defaultSpacerHorizontalSmall = SizedBox(width: defaultPaddingSmall);
 const defaultSpacerHorizontalTiny = SizedBox(width: defaultPaddingTiny);
 
-
 const double landscapeAspectRatio = 16 / 9;
 
 const screaminGreen = Color(0xff57EE9D);
+const mercuryGray = Color(0xFFE5E5E5);

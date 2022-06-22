@@ -1,7 +1,7 @@
 import 'package:basic_template/basic_template.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-
 import '../di.dart';
+
 
 setupApp() async {
   // setUrlStrategy(PathUrlStrategy());
@@ -9,4 +9,5 @@ setupApp() async {
   DependencyInjection.inject();
 
   await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  
 }

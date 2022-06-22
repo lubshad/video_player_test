@@ -1,3 +1,4 @@
+import 'package:basic_template/basic_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,8 +18,16 @@ class AppTheme {
   }
 
   static ThemeData get theme => ThemeData.light().copyWith(
+      textTheme: GoogleFonts.rubikTextTheme(),
       platform: TargetPlatform.iOS,
+      scaffoldBackgroundColor: mercuryGray,
       colorScheme: const ColorScheme.light().copyWith(primary: screaminGreen),
+      sliderTheme: SliderThemeData(
+          overlayShape: SliderComponentShape.noOverlay,
+          trackHeight: 2,
+          inactiveTrackColor: Colors.black26,
+          thumbShape: const RoundSliderThumbShape(
+              enabledThumbRadius: 6, disabledThumbRadius: 6)),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
       ));

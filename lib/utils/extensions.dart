@@ -49,7 +49,7 @@ extension ViewExtention on num {
     if (this < 1000) {
       return "${this} views";
     } else {
-      return "${this ~/ 1000}K views";
+      return "${(this / 1000).toStringAsPrecision(2)}K views";
     }
   }
 }

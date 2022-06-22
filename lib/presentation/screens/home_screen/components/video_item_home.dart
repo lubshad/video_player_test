@@ -1,5 +1,7 @@
+import 'package:basic_template/basic_template.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:video_player_test/presentation/route.dart';
 import 'package:video_player_test/utils/extensions.dart';
 
 import '../../../../domain/entities/video_details.dart';
@@ -15,36 +17,66 @@ class VideoItemHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const AspectRatio(
-          aspectRatio: landscapeAspectRatio,
-          child: Placeholder(),
-        ),
-        ListTile(
-          leading: const CircleAvatar(),
-          title: Text(videoDetails.title),
-          subtitle: Row(
-            children: [
-              Text(
-                videoDetails.creatorName,
-                style:
-                    Theme.of(context).textTheme.caption!.copyWith(fontSize: 10),
-              ),
-              Text(
-                videoDetails.totalViews.views,
-                style:
-                    Theme.of(context).textTheme.caption!.copyWith(fontSize: 10),
-              ),
-              Text(
-                timeago.format(videoDetails.uploadedOn),
-                style:
-                    Theme.of(context).textTheme.caption!.copyWith(fontSize: 10),
-              ),
-            ],
+    return InkWell(
+      onTap: () =>
+          Get.toNamed(AppRoute.videoPlayerScreen, arguments: videoDetails),
+      child: Column(
+        children: [
+          const AspectRatio(
+            aspectRatio: landscapeAspectRatio,
+            child: Placeholder(),
           ),
-        )
-      ],
+          ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.white,
+              backgroundImage:
+                  CachedNetworkImageProvider(videoDetails.creatorAvatarUrl),
+            ),
+            title: Text(videoDetails.title),
+            subtitle: Row(
+              children: [
+                Text(
+                  videoDetails.creatorName,
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontSize: 10),
+                ),
+                const DotSpacer(),
+                Text(
+                  videoDetails.totalViews.views,
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontSize: 10),
+                ),
+                const DotSpacer(),
+                Text(
+                  timeago.format(videoDetails.uploadedOn),
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontSize: 10),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class DotSpacer extends StatelessWidget {
+  const DotSpacer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: defaultPaddingTiny),
+      child: Text("•"),
     );
   }
 }
