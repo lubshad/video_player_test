@@ -1,3 +1,4 @@
+import 'package:basic_template/basic_template.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_player_test/utils/constants.dart';
@@ -15,6 +16,10 @@ class BottomControlls extends StatelessWidget {
           ? videoPlayerController.pause()
           : videoPlayerController.play();
     }
+
+    // void tougleMute() {
+    //   videoPlayerController.mute
+    // }
 
     return Positioned(
       bottom: 0,
@@ -64,13 +69,19 @@ class BottomControlls extends StatelessWidget {
                                             milliseconds: mills.toInt())),
                                   );
                                 })),
-                        Text(
-                          "03:47/10:00",
-                          style: Theme.of(context)
-                              .textTheme
-                              .caption!
-                              .copyWith(fontSize: 10, color: Colors.white),
-                        )
+                        Builder(builder: (context) {
+                          Duration totalDuration =
+                              videoPlayerController.value.duration;
+                          Duration elapsedDuration =
+                              videoPlayerController.value.position;
+                          return Text(
+                            "${durationToMs(elapsedDuration)}/${durationToMs(totalDuration)}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontSize: 10, color: Colors.white),
+                          );
+                        })
                       ],
                     ),
                     defaultSpacerSmall,
