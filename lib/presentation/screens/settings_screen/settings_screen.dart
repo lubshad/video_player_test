@@ -40,8 +40,4 @@ class SettingsScreen extends StatelessWidget {
               );
             }));
   }
-
-  void changeTheme(bool? value) {
-    print(value);
-  }
 }

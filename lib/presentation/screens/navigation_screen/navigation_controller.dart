@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../downloads_listing/downloads_listing.dart';
 import '../home_screen/home_screen.dart';
+import '../profile_screen/profile_screen.dart';
 import '../settings_screen/settings_screen.dart';
 
 class NavigationController extends ChangeNotifier {
@@ -52,9 +53,7 @@ extension ScreenExtension on Screens {
       case Screens.home:
         return const HomeScreen();
       case Screens.profile:
-        return const Center(
-          child: Text('Profile'),
-        );
+        return const ProfileScreen();
       case Screens.settings:
         return const SettingsScreen();
       case Screens.downloads:
@@ -62,3 +61,4 @@ extension ScreenExtension on Screens {
     }
   }
 }
+

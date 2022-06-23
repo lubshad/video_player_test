@@ -31,23 +31,54 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(defaultPadding),
         child: Form(
           key: authController.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  label: Text("Phone"),
-                ),
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                validator: (phone) => validatePhone(phone: phone),
-              ),
-              defaultSpacer,
-              ElevatedButton(
-                  onPressed: authController.sentOtp,
-                  child: const Text("SENT OTP"))
-            ],
-          ),
+          child: AnimatedBuilder(
+              animation: authController,
+              builder: (context, child) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (authController.verificationID == null)
+                      TextFormField(
+                        controller: authController.phoneController,
+                        keyboardType: TextInputType.phone,
+                        autofillHints: const [AutofillHints.telephoneNumber],
+                        decoration: const InputDecoration(
+                          label: Text("Phone"),
+                        ),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        validator: (phone) => validatePhone(phone: phone),
+                      ),
+                    if (authController.verificationID != null)
+                      TextFormField(
+                        controller: authController.otpController,
+                        keyboardType: TextInputType.phone,
+                        decoration: const InputDecoration(
+                          label: Text("OTP"),
+                        ),
+                        autofillHints: const [AutofillHints.oneTimeCode],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        // validator: (phone) => validatePhone(phone: phone),
+                      ),
+                    defaultSpacer,
+                    ElevatedButton(
+                        onPressed: authController.verificationID == null
+                            ? authController.sendOtp
+                            : authController.verifyOtp,
+                        child: authController.buttonLoading
+                            ? const SizedBox(
+                                width: 300,
+                                height: defaultPaddingLarge,
+                                child: DefaultLoadingWidget())
+                            : Text(authController.verificationID == null
+                                ? "SENT OTP"
+                                : "Verify OTP"))
+                  ],
+                );
+              }),
         ),
       ),
     );
