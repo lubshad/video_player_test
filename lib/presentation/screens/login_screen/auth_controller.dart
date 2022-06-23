@@ -1,14 +1,20 @@
 import 'package:basic_template/basic_template.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 class AuthController extends ChangeNotifier {
   AuthController() {
     firebaseAuthInstance.userChanges().listen((newUser) {
       user = newUser;
       notifyListeners();
+      if (newUser == null) {
+        GetStorage().erase();
+      }
     });
   }
+
+  SmsAutoFill autoFill = SmsAutoFill();
 
   User? user;
   final firebaseAuthInstance = FirebaseAuth.instance;
@@ -38,6 +44,8 @@ class AuthController extends ChangeNotifier {
 
   sendOtp() async {
     if (validate()) {
+      makeButtonLoading();
+      await autoFill.listenForCode();
       await firebaseAuthInstance.verifyPhoneNumber(
         phoneNumber: "+91${phoneController.text}",
         verificationCompleted: (PhoneAuthCredential credential) {
@@ -53,18 +61,18 @@ class AuthController extends ChangeNotifier {
         codeSent: (String verificationId, int? resendToken) {
           verificationID = verificationId;
           logger.info(verificationId);
-          phoneController.clear();
-          otpController.clear();
           makeButtonNotLoading();
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
+      phoneController.clear();
     }
   }
 
   verifyOtp() async {
     makeButtonLoading();
     logger.info(verificationID);
+    logger.info(otpController.text);
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationID!, smsCode: otpController.text);
     try {
@@ -75,6 +83,8 @@ class AuthController extends ChangeNotifier {
           .showSnackBar(SnackBar(content: Text(e.message.toString())));
       makeButtonNotLoading();
     }
+    verificationID = null;
+    otpController.clear();
   }
 
   logoutUser() {

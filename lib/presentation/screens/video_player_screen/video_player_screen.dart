@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player_test/domain/entities/video_details.dart';
 
-import '../home_screen/components/video_list.dart';
+import '../video_list/video_list.dart';
 import 'components/action_section.dart';
 import 'components/video_player_section.dart';
 

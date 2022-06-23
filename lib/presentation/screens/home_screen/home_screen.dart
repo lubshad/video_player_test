@@ -2,7 +2,7 @@ import 'package:basic_template/basic_template.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player_test/presentation/screens/settings_screen/settings_controller.dart';
 
-import 'components/video_list.dart';
+import '../video_list/video_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({

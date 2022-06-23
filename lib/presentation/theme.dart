@@ -20,7 +20,8 @@ class AppTheme {
   static ThemeData get theme => ThemeData.light().copyWith(
       inputDecorationTheme:
           const InputDecorationTheme(border: OutlineInputBorder()),
-      textTheme: GoogleFonts.rubikTextTheme(),
+      textTheme: GoogleFonts.rubikTextTheme()
+          .copyWith(caption: const TextStyle(fontSize: 10, color: Colors.grey)),
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor: mercuryGray,
       colorScheme: const ColorScheme.light().copyWith(primary: Colors.blue),
@@ -37,9 +38,17 @@ class AppTheme {
       ));
 
   static ThemeData get darkTheme => ThemeData.dark().copyWith(
-      inputDecorationTheme:
-          const InputDecorationTheme(border: OutlineInputBorder()),
-      textTheme: GoogleFonts.rubikTextTheme(),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(primary: Colors.blue)),
+      listTileTheme: const ListTileThemeData(
+          textColor: Colors.white, iconColor: Colors.white),
+      inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(color: Colors.white),
+          border: OutlineInputBorder(),
+          focusedBorder: OutlineInputBorder()),
+      textTheme: GoogleFonts.rubikTextTheme().copyWith(
+          bodyText1: const TextStyle(color: Colors.white, fontSize: 12),
+          caption: const TextStyle(color: Colors.white, fontSize: 10)),
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor: youtubeBlack,
       colorScheme: const ColorScheme.light().copyWith(primary: youtubeBlack),
@@ -52,6 +61,7 @@ class AppTheme {
           thumbShape: const RoundSliderThumbShape(
               enabledThumbRadius: 6, disabledThumbRadius: 6)),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-      ));
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey));
 }

@@ -2,6 +2,7 @@ import 'package:basic_template/basic_template.dart';
 import 'package:video_player_test/presentation/screens/downloads_listing/downloads_listing_controller.dart';
 import 'package:video_player_test/presentation/screens/login_screen/auth_controller.dart';
 import 'package:video_player_test/presentation/screens/settings_screen/settings_controller.dart';
+import 'package:video_player_test/presentation/screens/video_list/video_list_controller.dart';
 
 import 'data/core/api_constants.dart';
 import 'data/data_sources/remote_data_source.dart';
@@ -17,5 +18,6 @@ class DependencyInjection {
     Get.lazyPut(() => DownloadsListingController());
     Get.lazyPut(() => SettingsController());
     Get.lazyPut(() => AuthController());
+    Get.lazyPut(() => VideoListController());
   }
 }

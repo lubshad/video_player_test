@@ -8,6 +8,4 @@ setupApp() async {
   setupLogger();
   DependencyInjection.inject();
   
-  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
-  
 }

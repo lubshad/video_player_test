@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../utils/constants.dart';
@@ -7,7 +6,7 @@ class CustomIconButton extends StatelessWidget {
   const CustomIconButton({
     Key? key,
     required this.child,
-     this.onTap,
+    this.onTap,
   }) : super(key: key);
   final Widget child;
   final VoidCallback? onTap;
@@ -16,6 +15,7 @@ class CustomIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(defaultPadding),
       child: Container(
         padding: const EdgeInsets.all(defaultPaddingSmall),
         alignment: Alignment.center,

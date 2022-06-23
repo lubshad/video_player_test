@@ -9,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
+  // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   setupApp();
   runApp(const MyApp());
 }
@@ -21,7 +22,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme.setSystemOverlay();
-    
     return GetMaterialApp(
       title: "Video Player",
       theme: AppTheme.theme,

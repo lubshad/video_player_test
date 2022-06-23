@@ -9,11 +9,13 @@ class VideoDetails {
   final String creatorAvatarUrl;
   final int totalViews;
   final Timestamp uploadedOn;
+  final String thumbnail;
 
   VideoDetails(
       {required this.title,
       required this.videoUrl,
       required this.duration,
+      required this.thumbnail,
       required this.creatorName,
       required this.creatorAvatarUrl,
       this.id,
@@ -30,12 +32,14 @@ class VideoDetails {
       'creatorAvatarUrl': creatorAvatarUrl,
       'views': totalViews,
       'uploadedOn': uploadedOn.millisecondsSinceEpoch,
+      "thumbnail": thumbnail,
     };
   }
 
   factory VideoDetails.fromMap(Map<String, dynamic> map, String id) {
     return VideoDetails(
         id: id,
+        thumbnail: map["thumbnail"],
         title: map["title"],
         videoUrl: map["videoUrl"],
         duration: Duration(seconds: map["duration"]),
@@ -47,6 +51,7 @@ class VideoDetails {
 
   factory VideoDetails.fromMapLocal(Map<String, dynamic> map) {
     return VideoDetails(
+      thumbnail: map["thumbnail"],
         id: map["id"],
         title: map["title"],
         videoUrl: map["videoUrl"],

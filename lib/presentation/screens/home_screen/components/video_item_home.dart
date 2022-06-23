@@ -25,7 +25,7 @@ class VideoItemHome extends StatelessWidget {
       },
       child: Column(
         children: [
-          Thumbnail(videoUrl: videoDetails.videoUrl),
+          Thumbnail(thumbnail: videoDetails.thumbnail),
           ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.white,
@@ -33,32 +33,23 @@ class VideoItemHome extends StatelessWidget {
                   CachedNetworkImageProvider(videoDetails.creatorAvatarUrl),
             ),
             title: Text(videoDetails.title),
-            subtitle: Row(
-              children: [
-                Text(
-                  videoDetails.creatorName,
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(fontSize: 10),
-                ),
-                const DotSpacer(),
-                Text(
-                  videoDetails.totalViews.views,
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(fontSize: 10),
-                ),
-                const DotSpacer(),
-                Text(
-                  timeago.format(videoDetails.uploadedOn.toDate()),
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(fontSize: 10),
-                ),
-              ],
+            subtitle: RichText(
+              text: TextSpan(
+                style: Theme.of(context).textTheme.caption,
+                children: [
+                  TextSpan(
+                      text: videoDetails.creatorName,
+                  ),
+                  const WidgetSpan(child: DotSpacer()),
+                  TextSpan(
+                    text: videoDetails.totalViews.views,
+                  ),
+                  const WidgetSpan(child: DotSpacer()),
+                  TextSpan(
+                    text: timeago.format(videoDetails.uploadedOn.toDate()),
+                  ),
+                ],
+              ),
             ),
           )
         ],

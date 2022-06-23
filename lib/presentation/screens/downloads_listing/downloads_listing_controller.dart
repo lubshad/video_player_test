@@ -62,10 +62,11 @@ class DownloadsListingController extends ChangeNotifier {
     // for (VideoDetails video in downloadedVideos) {
     //   videosRef.add(video.toMap());
     // }
+    // box.erase();
     var data = box.read("videos");
     setVideos(data);
     box.listenKey("videos", (value) {
-      setVideos(data);
+      setVideos(value);
     });
   }
 
@@ -77,15 +78,16 @@ class DownloadsListingController extends ChangeNotifier {
 
   setVideos(data) {
     List jsonList = jsonDecode(data ?? jsonEncode([]));
-    print(jsonList);
     downloadedVideos =
         jsonList.map((e) => VideoDetails.fromMapLocal(e)).toList();
     notifyListeners();
   }
 
-  void addToDownloads(VideoDetails videoDetails) {
+  void addToDownloads(VideoDetails videoDetails) async {
+    logger.info("addting to download list");
     downloadedVideos.add(videoDetails);
-    box.write('videos', jsonEncode(downloadedVideos.map((e) => e.toMap())));
+    box.write(
+        'videos', jsonEncode(downloadedVideos.map((e) => e.toMap()).toList()));
     ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
         content: Row(
       children: [
