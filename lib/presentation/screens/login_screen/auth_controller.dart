@@ -85,8 +85,8 @@ class AuthController extends ChangeNotifier {
     otpController.clear();
   }
 
-  logoutUser() {
+  logoutUser()async  {
+    await Get.find<DownloadsListingController>().box.erase();
     firebaseAuthInstance.signOut();
-    Get.find<DownloadsListingController>().box.erase();
   }
 }
