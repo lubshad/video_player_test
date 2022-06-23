@@ -2,15 +2,13 @@ import 'package:basic_template/basic_template.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+import 'package:video_player_test/presentation/screens/downloads_listing/downloads_listing_controller.dart';
 
 class AuthController extends ChangeNotifier {
   AuthController() {
     firebaseAuthInstance.userChanges().listen((newUser) {
       user = newUser;
       notifyListeners();
-      if (newUser == null) {
-        GetStorage().erase();
-      }
     });
   }
 
@@ -89,5 +87,6 @@ class AuthController extends ChangeNotifier {
 
   logoutUser() {
     firebaseAuthInstance.signOut();
+    Get.find<DownloadsListingController>().box.erase();
   }
 }

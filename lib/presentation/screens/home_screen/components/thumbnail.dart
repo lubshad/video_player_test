@@ -49,7 +49,10 @@ class _ThumbnailState extends State<Thumbnail> {
       //         thumbnailMemmoryImage!,
       //         fit: BoxFit.cover,
       //       ),
-      child: CachedNetworkImage(imageUrl: widget.thumbnail),
+      child: CachedNetworkImage(
+        imageUrl: widget.thumbnail,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
